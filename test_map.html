@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Place Searches</title>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        body {
+            background-color: #FAF3E3;
+        }
+
+        #random_field {
+            text-align: center;
+        }
+
+        #map {
+            width: 70%;
+            height: 40em;
+            margin: 0 auto;
+            background-color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <ul>
+            <li class="menu"><a href="member.html">Member</a></li>
+            <li class="menu"><a href="">ยังไม่รู้จะทำเป็นหน้าอะไร</a></li>
+            <li class="menu"><a class="active" href="test_map.html">Map</a></li>
+            <li class="menu"><a href="random.html">Random</a></li>
+            <li style="float: left" id="logo"><a id="img" href="index.html"><img src="images/icon/logo_new.png"></a>
+            </li>
+        </ul>
+    </nav>
+    <article>
+        <div id="random_field">
+            <input type="button" value="Search" onclick="initMap()">
+            <div id="map"></div>
+        </div>
+    </article>
+
+    <script>
+        var map;
+        var service;
+        var infowindow;
+
+        function initMap() {
+
+            infoWindow = new google.maps.InfoWindow;
+
+            // HTML5 geolocation
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function (position) {
+                    var pos = {
+                        lat: position.coords.latitude,
+                        lng: position.coords.longitude
+                    };
+
+                    initialize(pos.lat, pos.lng);
+
+                }, function () {
+                    handleLocationError(true, infoWindow, map.getCenter());
+                });
+            } else {
+                // Browser doesn't support Geolocation
+                handleLocationError(false, infoWindow, map.getCenter());
+            }
+        }
+
+        function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+            infoWindow.setPosition(pos);
+            infoWindow.setContent(browserHasGeolocation ?
+                'Error: The Geolocation service failed.' :
+                'Error: Your browser doesn\'t support geolocation.');
+            infoWindow.open(map);
+        }
+
+        function initialize(lat, lng) {
+            var myLocation = new google.maps.LatLng(lat, lng);
+
+            map = new google.maps.Map(document.getElementById('map'), {
+                center: myLocation,
+                zoom: 15
+            });
+            map.setCenter(myLocation);
+
+            var marker = new google.maps.Marker({
+                map: map,
+                position: myLocation,
+                title: "Me",
+                icon: "images/icon/me_maker.png"
+            });
+            marker.setMap(map);
+
+            var infowindow = new google.maps.InfoWindow({
+                content: "I'm here"
+            });
+            infowindow.open(map, marker);
+
+            var request = {
+                location: myLocation,
+                radius: '500',
+                query: 'ข้าวมันไก่'
+            };
+
+            service = new google.maps.places.PlacesService(map);
+            service.textSearch(request, callback);
+        }
+
+        function callback(results, status) {
+            if (status == google.maps.places.PlacesServiceStatus.OK) {
+                for (var i = 0; i < results.length; i++) {
+                    createMarker(results[i]);
+                }
+            }
+        }
+
+        function createMarker(place) {
+            var marker = new google.maps.Marker({
+                map: map,
+                position: place.geometry.location,
+                titile: place.name,
+                icon: "images/icon/food_maker.png"
+            });
+
+            var content = place.name + "<br>" + place.formatted_address
+            var infowindow = new google.maps.InfoWindow({
+                content: content
+            });
+
+            google.maps.event.addListener(marker, 'mouseover', function () {
+                infowindow.open(map, marker);
+            });
+
+            google.maps.event.addListener(marker, 'mouseout', function () {
+                infowindow.close();
+            });
+
+            google.maps.event.addListener(marker, 'click', function () {
+                map.setZoom(20);
+                map.setCenter(marker.getPosition());
+            });
+        }
+    </script>
+    <script type="text/javascript"
+        src="https://maps.googleapis.com/maps/api/js?key=<api_key>&libraries=places&region=TH&callback=initMap">
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,54 @@
+@media only screen and (max-width: 768px) {
+    nav {
+        font-size: 10px;
+    }
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Kanit', sans-serif;
+}
+
+nav {
+    position: sticky;
+    top: 0;
+    z-index: 4;
+}
+
+ul {
+    list-style-type: none;
+    overflow: hidden;
+    background-color: #DC6243;
+}
+
+ul li {
+    float: right;
+    font-size: 1.2em;
+}
+
+ul li a {
+    display: block;
+    text-decoration: none;
+    color: white;
+    padding: 0.8em 1em;
+}
+
+ul li a img {
+    display: block;
+    width: 12em;
+}
+
+ul li a#img {
+    padding: 0.35em 1em;
+}
+
+ul .menu a:not(.active):hover {
+    text-decoration: none;
+    background-color: rgba(75, 75, 75, 0.25);
+}
+
+nav .active {
+    background-color: #FAF3E3;
+    color: #355A24;
+}

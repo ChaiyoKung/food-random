@@ -1,0 +1,62 @@
+@media only screen and (max-width: 768px) {
+    nav {
+        font-size: 10px;
+    }
+
+    .member {
+        margin: 0.5em;
+        background-color: white;
+        padding: 1em;
+        border-radius: 0.8em;
+        overflow: hidden;
+        font-size: 10px;
+    }
+
+    .member img {
+        height: 120px;
+        width: 120px;
+    }
+
+    article p {
+        float: left;
+        margin-top: 0.5em !important;
+        margin-left: 0 !important;
+    }
+}
+
+body {
+    background-color: #FAF3E3;
+}
+
+#table {
+    width: 85%;
+    margin: 1em auto;
+}
+
+.row {
+    display: flex;
+}
+
+.column {
+    width: 90%;
+}
+
+.member {
+    margin: 0.5em;
+    background-color: white;
+    padding: 1em;
+    border-radius: 0.8em;
+    overflow: hidden;
+}
+
+article img {
+    width: 200px;
+    height: 200px;
+    float: left;
+
+}
+
+article p {
+    float: left;
+    margin-left: 0.5em;
+}

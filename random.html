@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Random</title>
+    <link href="https://fonts.googleapis.com/css?family=Kanit&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/random.css">
+</head>
+
+<body>
+    <nav>
+        <ul>
+            <li class="menu"><a href="member.html">Member</a></li>
+            <li class="menu"><a class="active" href="random.html">Random</a></li>
+            <li style="float: left" id="logo"><a id="img" href="index.html"><img src="images/icon/logo_new.png"></a>
+            </li>
+        </ul>
+    </nav>
+    <div class="article">
+        <div class="center">
+            <input type=button value="Food Random" onclick="randomFood()">
+            <div id="img_random"></div>
+            <div id="food_name"></div>
+        </div>
+        <div id="map_field">
+            <div id="map"></div>
+        </div>
+    </div>
+
+    <script src="js/random.js"></script>
+    <script type="text/javascript"
+        src="https://maps.googleapis.com/maps/api/js?key=<api_key>&libraries=places">
+    </script>
+</body>
+
+</html>
